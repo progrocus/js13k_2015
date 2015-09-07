@@ -4,8 +4,6 @@
 var canvas = document.getElementById('gameCanvas');
 var ctx = canvas.getContext('2d');
 
-
-var bgReady = false;
 var scaledImageReady = false;
 
 var scaledMap;
@@ -17,28 +15,42 @@ var yTiles = 13;
 var map = new Image();
 map.src = 'mvh.png';
 map.onload = function () {
-    bgReady = true;
     scaledMap = resize(map, scale);
     scaledImageReady = true;
+    init();
 };
 
+var gameObjects = [];
 
+var init = function () {
+    var tile = new Sprite(ctx, scaledMap, 0, tileSize, tileSize, 0, 0);
+    var background = new TiledBackground(ctx,scaledMap,2,tileSize);
+    var scanLines = new TiledBackground(ctx,scaledMap,11,tileSize);
+    gameObjects.push(background);
+    gameObjects.push(scanLines);
+};
 
 var reset = function () {
 
 };
 
 var update = function () {
-
+    gameObjects.forEach(function(o) {
+        o.update();
+    });
 };
 
 var render = function () {
     ctx.clearRect(0,0,canvas.width, canvas.height);
-    drawBackground();
+
+    if (!scaledImageReady) return;
+
+    gameObjects.forEach(function(o) {
+        o.render();
+    });
 
     // TODO: Add game render logic
 
-    drawScanlines();
 };
 
 var loop = function () {
@@ -52,67 +64,6 @@ var loop = function () {
 
     requestAnimationFrame(loop);
 };
-
-var drawBackground = function () {
-    var background = [
-        12, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 13,
-        0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0,
-        0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0,
-        0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0,
-        0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0,
-        0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0,
-        0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0,
-        0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0,
-        0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0,
-        0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0,
-        0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0,
-        0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0,
-        14, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 15];
-
-    var x = 0;
-    var y = 0;
-    background.forEach(function(id){
-        drawTile(id,
-            tileSize,
-            tileSize,
-            x * tileSize,
-            y * tileSize);
-        x++;
-        if (x == yTiles) {
-            x = 0;
-            y++;
-        }
-    });
-};
-
-var drawScanlines = function () {
-    var x = 0;
-    var y = 0;
-    for (var i = 0; i < xTiles * yTiles; i++) {
-        drawTile(11,
-            tileSize,
-            tileSize,
-            x * tileSize,
-            y * tileSize);
-        x++;
-        if (x == yTiles) {
-            x = 0;
-            y++;
-        }
-    }
-};
-
-var drawTile = function(tileId, width, height, x, y) {
-
-    if (!scaledImageReady) return;
-
-    var ox = tileId % 4;
-    var oy = Math.floor(tileId / 4);
-    var sx = ox * width;
-    var sy = oy * height;
-
-    ctx.drawImage(scaledMap, sx, sy, width, height, x, y, width, height);
-}
 
 // http://phoboslab.org/log/2012/09/drawing-pixels-is-hard
 var resize = function( img, scale ) {
