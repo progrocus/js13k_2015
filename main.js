@@ -48,9 +48,6 @@ var render = function () {
     gameObjects.forEach(function(o) {
         o.render();
     });
-
-    // TODO: Add game render logic
-
 };
 
 var loop = function () {

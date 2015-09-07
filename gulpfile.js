@@ -8,7 +8,7 @@ var htmlmin = require('gulp-htmlmin');
 var zipFile = 'js13k_2015.zip';
 
 var paths = {
-    scripts: ['main.js'],
+    scripts: ['main.js', 'Sprite.js', 'TiledBackground.js'],
     pngs:['*.png'],
     htmls:['*.html'],
     dist:'./deploy/',
