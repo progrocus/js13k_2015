@@ -27,9 +27,9 @@ TiledBackground.prototype.generateTiles = function (width, height) {
     }
 };
 
-TiledBackground.prototype.update = function() {
+TiledBackground.prototype.update = function(dt) {
     this.tiles.forEach(function(tile) {
-        tile.update();
+        tile.update(dt);
     });
 };
 
