@@ -4,7 +4,7 @@
 
 var MAXSPEED    = 32 * 4;
 
-var Sprite = function(ctx, image, tileId, width, height, x, y, dx, dy) {
+var Sprite = function(ctx, image, tileId, width, height, x, y) {
     this.ctx = ctx;
     this.image = image;
     this.tileId = tileId;
@@ -12,26 +12,10 @@ var Sprite = function(ctx, image, tileId, width, height, x, y, dx, dy) {
     this.height = height;
     this.x = x;
     this.y = y;
-    this.dx = dx != undefined ? dx : 0;
-    this.dy = dy != undefined ? dy : 0;
 };
 
 Sprite.prototype.update = function(dt) {
-    if(this.right) {
-        this.x  = Math.ceil(this.x  + (dt * MAXSPEED));
-    }
-
-    if(this.left) {
-        this.x  = Math.floor(this.x  - (dt * MAXSPEED));
-    }
-
-    if(this.up) {
-        this.y  = Math.floor(this.y  - (dt * MAXSPEED));
-    }
-
-    if(this.down) {
-        this.y  = Math.ceil(this.y  + (dt * MAXSPEED));
-    }
+    // Subclass
 };
 
 Sprite.prototype.render = function() {
@@ -52,6 +36,27 @@ Sprite.prototype.render = function() {
         this.height);
 };
 
-function bound(x, min, max) {
-    return Math.max(min, Math.min(max, x));
-}
+Sprite.prototype.intersects = function (r1, r2) {
+    return !(r2.left > r1.right ||
+    r2.right < r1.left ||
+    r2.top > r1.bottom ||
+    r2.bottom < r1.top);
+};
+
+Sprite.prototype.bounds = function () {
+    var bounds = {};
+    bounds.left = this.x;
+    bounds.top = this.y;
+    bounds.right = this.x + this.width;
+    bounds.bottom = this.y + this.height;
+    return bounds;
+};
+
+Sprite.prototype.newCollisionMask = function (x, y, width, height) {
+    var bounds = {};
+    bounds.left = x;
+    bounds.top = y;
+    bounds.right = x + width;
+    bounds.bottom = y + height;
+    return bounds;
+};

@@ -20,16 +20,29 @@ map.onload = function () {
     init();
 };
 
+var backgroundLayer = [];
+var foregroundLayer = [];
 var gameObjects = [];
+var walls = [];
 var hero;
 
 var init = function () {
-    hero = new Sprite(ctx, scaledMap, 20, tileSize, tileSize, 0, 0, 0, 0);
     var background = new TiledBackground(ctx,scaledMap,2,tileSize);
-    var scanLines = new TiledBackground(ctx,scaledMap,11,tileSize);
-    gameObjects.push(background);
+    backgroundLayer.push(background);
+
+    hero = new Hero(ctx, scaledMap, 20, tileSize, tileSize, 320, 160);
     gameObjects.push(hero);
-    gameObjects.push(scanLines);
+
+    var wall = new Wall(ctx, scaledMap, 0, tileSize, tileSize, 220, 160);
+    walls.push(wall);
+    var wall = new Wall(ctx, scaledMap, 0, tileSize, tileSize, 252+32, 160);
+    walls.push(wall);
+
+    addWalls();
+    hero.addCollisionGroup(walls);
+
+    var scanLines = new TiledBackground(ctx,scaledMap,11,tileSize);
+    foregroundLayer.push(scanLines);
 };
 
 var reset = function () {
@@ -42,6 +55,42 @@ var update = function (dt) {
     });
 };
 
+var addWalls = function () {
+    // Top
+    for (var i = 1; i < xTiles - 1 ; i++) {
+        var wall = new Wall(ctx, scaledMap, 1, tileSize, tileSize, i*tileSize, 0);
+        walls.push(wall);
+    }
+
+    // Bottom
+    for (var i = 1; i < xTiles - 1 ; i++) {
+        var wall = new Wall(ctx, scaledMap, 1, tileSize, tileSize, i*tileSize, (yTiles-1)*tileSize);
+        walls.push(wall);
+    }
+
+    // Left
+    for (var i = 1; i < xTiles - 1 ; i++) {
+        var wall = new Wall(ctx, scaledMap, 0, tileSize, tileSize, 0, i*tileSize);
+        walls.push(wall);
+    }
+
+    // Right
+    for (var i = 1; i < xTiles - 1 ; i++) {
+        var wall = new Wall(ctx, scaledMap, 0, tileSize, tileSize, (xTiles-1)*tileSize, i*tileSize);
+        walls.push(wall);
+    }
+
+    // Corners
+    var wall = new Wall(ctx, scaledMap, 12, tileSize, tileSize, 0, 0);
+    walls.push(wall);
+    wall = new Wall(ctx, scaledMap, 13, tileSize, tileSize, (xTiles-1)*tileSize, 0);
+    walls.push(wall);
+    wall = new Wall(ctx, scaledMap, 14, tileSize, tileSize, 0, (yTiles -1) * tileSize);
+    walls.push(wall);
+    wall = new Wall(ctx, scaledMap, 15, tileSize, tileSize, (xTiles-1)*tileSize, (yTiles -1) * tileSize);
+    walls.push(wall);
+};
+
 //---------------------------------
 //  RENDER
 //---------------------------------
@@ -51,7 +100,19 @@ var render = function () {
     if (!scaledImageReady) return;
 
 
+    backgroundLayer.forEach(function(o) {
+        o.render();
+    });
+
+    walls.forEach(function(o) {
+        o.render();
+    });
+
     gameObjects.forEach(function(o) {
+        o.render();
+    });
+
+    foregroundLayer.forEach(function(o) {
         o.render();
     });
 };
