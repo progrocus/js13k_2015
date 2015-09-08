@@ -11,6 +11,7 @@ var Hero = function(ctx, image, tileId, width, height, x, y) {
     this.x = x;
     this.y = y;
     this.collisionGroup = [];
+    this.eggCollisionGroup =[];
 };
 
 Hero.prototype = new Sprite();
@@ -18,6 +19,10 @@ Hero.prototype.constructor = Hero;
 
 Hero.prototype.addCollisionGroup = function(group) {
     this.collisionGroup = group;
+};
+
+Hero.prototype.addEggCollisionGroup = function(group) {
+    this.eggCollisionGroup = group;
 };
 
 Hero.prototype.update = function(dt) {
@@ -45,17 +50,51 @@ Hero.prototype.update = function(dt) {
 
     var mask = this.newCollisionMask(nx+10,ny+10,this.width-20, this.height-20);
 
+    var collided = this.collided(this.collisionGroup, mask);
+    if (collided) return;
+
+    this.x = nx;
+    this.y = ny;
+
+    this.collectEgg(this.eggCollisionGroup, mask);
+
+};
+
+Hero.prototype.collided = function (group, mask) {
+
     var collided = false;
-    for (var i = 0; i < this.collisionGroup.length; i++) {
-        var c = this.collisionGroup[i];
+    for (var i = 0; i < group.length; i++) {
+        var c = group[i];
         if (this.intersects(mask, c.bounds())){
             collided = true;
             break;
         }
     }
+    return collided;
+};
 
-    if (collided) return;
+Hero.prototype.collectEgg = function (group, mask) {
 
-    this.x = nx;
-    this.y = ny;
+    var collided = false;
+    for (var i = 0; i < group.length; i++) {
+        var c = group[i];
+
+        if (c.alive = false) continue;
+
+        if (this.intersects(mask, c.bounds())) {
+            collided = true;
+            c.collected();
+            group.splice(i,1);
+            break;
+        }
+    }
+    return collided;
+};
+
+Hero.prototype.win = function () {
+
+};
+
+Hero.prototype.fail = function () {
+
 };

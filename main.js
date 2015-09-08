@@ -24,6 +24,8 @@ var backgroundLayer = [];
 var foregroundLayer = [];
 var gameObjects = [];
 var walls = [];
+var eggs = [];
+
 var hero;
 
 var init = function () {
@@ -41,6 +43,8 @@ var init = function () {
     addWalls();
     hero.addCollisionGroup(walls);
 
+    loadLevel();
+
     var scanLines = new TiledBackground(ctx,scaledMap,11,tileSize);
     foregroundLayer.push(scanLines);
 };
@@ -53,6 +57,10 @@ var update = function (dt) {
     gameObjects.forEach(function(o) {
         o.update(dt);
     });
+
+    if (eggs.length == 0) {
+        // TODO: display key
+    }
 };
 
 var addWalls = function () {
@@ -91,6 +99,17 @@ var addWalls = function () {
     walls.push(wall);
 };
 
+var loadLevel = function() {
+    var egg = new Egg(ctx, scaledMap, 19, tileSize, tileSize, 100, 100);
+    eggs.push(egg);
+    egg = new Egg(ctx, scaledMap, 19, tileSize, tileSize, 100, 300);
+    eggs.push(egg);
+    egg = new Egg(ctx, scaledMap, 19, tileSize, tileSize, 300, 50);
+    eggs.push(egg);
+
+    hero.eggCollisionGroup = eggs;
+};
+
 //---------------------------------
 //  RENDER
 //---------------------------------
@@ -105,6 +124,10 @@ var render = function () {
     });
 
     walls.forEach(function(o) {
+        o.render();
+    });
+
+    eggs.forEach(function(o) {
         o.render();
     });
 
