@@ -12,6 +12,7 @@ var Hero = function(ctx, image, tileId, width, height, x, y) {
     this.y = y;
     this.collisionGroup = [];
     this.eggCollisionGroup =[];
+    this.doorCollisionGroup = [];
 };
 
 Hero.prototype = new Sprite();
@@ -53,6 +54,9 @@ Hero.prototype.update = function(dt) {
     var collided = this.collided(this.collisionGroup, mask);
     if (collided) return;
 
+    collided = this.exitDoor(this.doorCollisionGroup, mask);
+    if (collided) return;
+
     this.x = nx;
     this.y = ny;
 
@@ -79,8 +83,6 @@ Hero.prototype.collectEgg = function (group, mask) {
     for (var i = 0; i < group.length; i++) {
         var c = group[i];
 
-        if (c.alive = false) continue;
-
         if (this.intersects(mask, c.bounds())) {
             collided = true;
             c.collected();
@@ -91,8 +93,27 @@ Hero.prototype.collectEgg = function (group, mask) {
     return collided;
 };
 
-Hero.prototype.win = function () {
+Hero.prototype.exitDoor = function (group, mask) {
+    var collided = false;
+    for (var i = 0; i < group.length; i++) {
+        var c = group[i];
 
+
+        if (this.intersects(mask, c.bounds())) {
+            if (c.isOpen) {
+                collided = false;
+                this.win();
+            } else {
+                collided = true;
+            }
+            break;
+        }
+    }
+    return collided;
+};
+
+Hero.prototype.win = function () {
+    console.log("win");
 };
 
 Hero.prototype.fail = function () {

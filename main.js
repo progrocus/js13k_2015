@@ -25,14 +25,16 @@ var foregroundLayer = [];
 var gameObjects = [];
 var walls = [];
 var eggs = [];
+var doors = [];
 
 var hero;
+
 
 var init = function () {
     var background = new TiledBackground(ctx,scaledMap,2,tileSize);
     backgroundLayer.push(background);
 
-    hero = new Hero(ctx, scaledMap, 20, tileSize, tileSize, 320, 160);
+    hero = new Hero(ctx, scaledMap, 28, tileSize, tileSize, 320, 160);
     gameObjects.push(hero);
 
     var wall = new Wall(ctx, scaledMap, 0, tileSize, tileSize, 220, 160);
@@ -60,12 +62,16 @@ var update = function (dt) {
 
     if (eggs.length == 0) {
         // TODO: display key
+        doors.forEach(function(d) {
+            d.openDoor();
+        });
     }
 };
 
 var addWalls = function () {
     // Top
     for (var i = 1; i < xTiles - 1 ; i++) {
+        if (i == 6) continue;
         var wall = new Wall(ctx, scaledMap, 1, tileSize, tileSize, i*tileSize, 0);
         walls.push(wall);
     }
@@ -108,6 +114,11 @@ var loadLevel = function() {
     eggs.push(egg);
 
     hero.eggCollisionGroup = eggs;
+
+    var door = new Door(ctx, scaledMap, 4, tileSize, tileSize, 6*tileSize, 0);
+    doors.push(door);
+
+    hero.doorCollisionGroup = doors;
 };
 
 //---------------------------------
@@ -128,6 +139,10 @@ var render = function () {
     });
 
     eggs.forEach(function(o) {
+        o.render();
+    });
+
+    doors.forEach(function(o) {
         o.render();
     });
 
