@@ -12,12 +12,15 @@ var tileSize = 16 * scale;
 var xTiles = 13;
 var yTiles = 13;
 
+var started = false;
+
 var map = new Image();
 map.src = 'mvh.png';
 map.onload = function () {
     scaledMap = resize(map, scale);
     scaledImageReady = true;
     init();
+    started = true;
 };
 
 var backgroundLayer = [];
@@ -26,6 +29,7 @@ var gameObjects = [];
 var walls = [];
 var eggs = [];
 var doors = [];
+var chest;
 
 var hero;
 
@@ -56,12 +60,18 @@ var reset = function () {
 };
 
 var update = function (dt) {
+
+    if (started == false) return;
+
     gameObjects.forEach(function(o) {
         o.update(dt);
     });
 
     if (eggs.length == 0) {
-        // TODO: display key
+        chest.openChest();
+    }
+
+    if (chest.hasKey == false) {
         doors.forEach(function(d) {
             d.openDoor();
         });
@@ -119,6 +129,9 @@ var loadLevel = function() {
     doors.push(door);
 
     hero.doorCollisionGroup = doors;
+
+    chest = new Chest(ctx, scaledMap, 16, tileSize, tileSize, tileSize, tileSize);
+    hero.addChest(chest);
 };
 
 //---------------------------------
@@ -145,6 +158,8 @@ var render = function () {
     doors.forEach(function(o) {
         o.render();
     });
+
+    chest.render();
 
     gameObjects.forEach(function(o) {
         o.render();

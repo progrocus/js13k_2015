@@ -13,6 +13,7 @@ var Hero = function(ctx, image, tileId, width, height, x, y) {
     this.collisionGroup = [];
     this.eggCollisionGroup =[];
     this.doorCollisionGroup = [];
+    this.chestToCollide = null;
 };
 
 Hero.prototype = new Sprite();
@@ -24,6 +25,10 @@ Hero.prototype.addCollisionGroup = function(group) {
 
 Hero.prototype.addEggCollisionGroup = function(group) {
     this.eggCollisionGroup = group;
+};
+
+Hero.prototype.addChest = function(chest) {
+    this.chestToCollide = chest;
 };
 
 Hero.prototype.update = function(dt) {
@@ -61,7 +66,16 @@ Hero.prototype.update = function(dt) {
     this.y = ny;
 
     this.collectEgg(this.eggCollisionGroup, mask);
+    this.collideWithChest(mask);
+};
 
+Hero.prototype.collideWithChest = function(mask) {
+
+    if (this.intersects(mask, this.chestToCollide.bounds())){
+        if (this.chestToCollide.isOpen && this.chestToCollide.hasKey){
+            this.chestToCollide.pickKey();
+        }
+    }
 };
 
 Hero.prototype.collided = function (group, mask) {
