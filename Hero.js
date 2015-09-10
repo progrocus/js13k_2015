@@ -14,6 +14,7 @@ var Hero = function(ctx, image, tileId, width, height, x, y) {
     this.eggCollisionGroup =[];
     this.doorCollisionGroup = [];
     this.chestToCollide = null;
+    this.rocksCollisionGroup = [];
 };
 
 Hero.prototype = new Sprite();
@@ -31,6 +32,10 @@ Hero.prototype.addChest = function(chest) {
     this.chestToCollide = chest;
 };
 
+Hero.prototype.addRocksCollisionGroup = function(group) {
+    this.rocksCollisionGroup = group;
+};
+
 Hero.prototype.update = function(dt) {
 
     var nx = this.x;
@@ -38,20 +43,28 @@ Hero.prototype.update = function(dt) {
 
     // TODO: handle the diagonal movement
 
+    var dx = 0;
+    var dy = 0;
+
+    var d = Math.round(dt * MAXSPEED);
     if(this.right) {
-        nx  = Math.ceil(this.x  + (dt * MAXSPEED));
+        nx  = (this.x  + d);
+        dx += d;
     }
 
     if(this.left) {
-        nx  = Math.floor(this.x  - (dt * MAXSPEED));
+        nx  = (this.x  - d);
+        dx -= d;
     }
 
     if(this.up) {
-        ny  = Math.floor(this.y  - (dt * MAXSPEED));
+        ny  = (this.y  - d);
+        dy -= d;
     }
 
     if(this.down) {
-        ny  = Math.ceil(this.y  + (dt * MAXSPEED));
+        ny  = (this.y  + d);
+        dy += d;
     }
 
     var mask = this.newCollisionMask(nx+10,ny+10,this.width-20, this.height-20);
@@ -60,6 +73,9 @@ Hero.prototype.update = function(dt) {
     if (collided) return;
 
     collided = this.exitDoor(this.doorCollisionGroup, mask);
+    if (collided) return;
+
+    collided = this.collidedWithMovable(this.rocksCollisionGroup, mask, dx, dy);
     if (collided) return;
 
     this.x = nx;
@@ -78,13 +94,19 @@ Hero.prototype.collideWithChest = function(mask) {
     }
 };
 
-Hero.prototype.collided = function (group, mask) {
+Hero.prototype.collidedWithMovable = function (group, mask, dx, dy) {
 
     var collided = false;
     for (var i = 0; i < group.length; i++) {
         var c = group[i];
         if (this.intersects(mask, c.bounds())){
-            collided = true;
+
+            if (c.canMove(dx, dy)) {
+                collided = false;
+            }
+            else {
+                collided = true;
+            }
             break;
         }
     }

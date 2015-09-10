@@ -29,6 +29,7 @@ var gameObjects = [];
 var walls = [];
 var eggs = [];
 var doors = [];
+var rocks = [];
 var chest;
 
 var hero;
@@ -132,6 +133,27 @@ var loadLevel = function() {
 
     chest = new Chest(ctx, scaledMap, 16, tileSize, tileSize, tileSize, tileSize);
     hero.addChest(chest);
+
+    var rock = new Rock(tileSize * 5, tileSize * 5);
+    rock.eggCollisionGroup = eggs;
+    rock.addGroupToCollisionGroup(walls);
+    rock.addGroupToCollisionGroup(doors);
+    rock.addItemToCollisionGroup(chest);
+    rocks.push(rock);
+
+    rock = new Rock(tileSize * 4, tileSize * 5);
+    rock.eggCollisionGroup = eggs;
+    rock.addGroupToCollisionGroup(walls);
+    rock.addGroupToCollisionGroup(doors);
+    rock.addItemToCollisionGroup(chest);
+
+    rocks.push(rock);
+
+    rocks.forEach(function(r) {
+        r.addRocksToCollisionGroup(rocks);
+    });
+
+    hero.addRocksCollisionGroup(rocks);
 };
 
 //---------------------------------
@@ -159,11 +181,16 @@ var render = function () {
         o.render();
     });
 
-    chest.render();
-
-    gameObjects.forEach(function(o) {
+    chest.render(function(o) {
         o.render();
     });
+
+    rocks.forEach(function(o) {
+        o.render();
+    });
+
+    // TODO: draw order according to y distance
+    hero.render();
 
     foregroundLayer.forEach(function(o) {
         o.render();

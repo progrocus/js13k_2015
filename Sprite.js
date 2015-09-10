@@ -60,3 +60,16 @@ Sprite.prototype.newCollisionMask = function (x, y, width, height) {
     bounds.bottom = y + height;
     return bounds;
 };
+
+Sprite.prototype.collided = function (group, mask) {
+
+    var collided = false;
+    for (var i = 0; i < group.length; i++) {
+        var c = group[i];
+        if (this.intersects(mask, c.bounds())){
+            collided = true;
+            break;
+        }
+    }
+    return collided;
+};
