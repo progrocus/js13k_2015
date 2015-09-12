@@ -2,10 +2,9 @@
  * Created by ehtd on 9/7/15.
  */
 
-var Hero = function(ctx, image, tileId, width, height, x, y) {
+var Hero = function(ctx, image, width, height, x, y) {
     this.ctx = ctx;
     this.image = image;
-    this.tileId = tileId;
     this.width = width;
     this.height = height;
     this.x = x;
@@ -15,6 +14,11 @@ var Hero = function(ctx, image, tileId, width, height, x, y) {
     this.doorCollisionGroup = [];
     this.chestToCollide = null;
     this.rocksCollisionGroup = [];
+    this.walkAnimation = [28,29,28,30];
+    this.animationIndex = 0;
+    this.tileId = this.walkAnimation[this.animationIndex];
+    this.tickCount = 0;
+    this.ticksPerFrame = 8;
 };
 
 Hero.prototype = new Sprite();
@@ -37,6 +41,8 @@ Hero.prototype.addRocksCollisionGroup = function(group) {
 };
 
 Hero.prototype.update = function(dt) {
+
+    this.tickCount++;
 
     var nx = this.x;
     var ny = this.y;
@@ -77,6 +83,17 @@ Hero.prototype.update = function(dt) {
 
     collided = this.collidedWithMovable(this.rocksCollisionGroup, mask, dx, dy);
     if (collided) return;
+
+
+    if (this.x == nx && this.y == ny) {
+        this.animationIndex = 0;
+    }
+    else if(this.tickCount > this.ticksPerFrame) {
+        this.animationIndex++;
+        this.animationIndex = this.animationIndex % this.walkAnimation.length;
+        this.tickCount = 0;
+    }
+    this.tileId = this.walkAnimation[this.animationIndex];
 
     this.x = nx;
     this.y = ny;

@@ -42,7 +42,7 @@ var init = function () {
     var background = new TiledBackground(ctx,scaledMap,2,tileSize);
     backgroundLayer.push(background);
 
-    hero = new Hero(ctx, scaledMap, 28, tileSize, tileSize, 320, 160);
+    hero = new Hero(ctx, scaledMap, tileSize, tileSize, 320, 160);
     gameObjects.push(hero);
 
     var wall = new Wall(ctx, scaledMap, 6, tileSize, tileSize, 220, 160);
