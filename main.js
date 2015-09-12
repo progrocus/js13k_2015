@@ -37,6 +37,7 @@ var doors = [];
 var rocks = [];
 var chest;
 var knights = [];
+var swords = [];
 
 var hero;
 
@@ -68,7 +69,11 @@ var update = function (dt) {
     });
 
     knights.forEach(function(o) {
-        o.update();
+        o.update(dt);
+    });
+
+    swords.forEach(function(o) {
+        o.update(dt);
     });
 
     if (eggs.length == 0) {
@@ -87,6 +92,15 @@ var update = function (dt) {
             k.seal();
         });
     }
+
+    var s = [];
+    swords.forEach(function(o){
+        if (o.alive){
+            s.push(o);
+        }
+    })
+
+    swords = s;
 };
 
 var loadLevel = function() {
@@ -181,6 +195,10 @@ var render = function () {
         o.render();
     });
 
+    swords.forEach(function(o) {
+        o.render();
+    });
+
     gameObjects.forEach(function(o) {
         o.render();
     });
@@ -188,9 +206,9 @@ var render = function () {
     // TODO: draw order according to y distance
     //hero.render();
 
-    foregroundLayer.forEach(function(o) {
-        o.render();
-    });
+    //foregroundLayer.forEach(function(o) {
+    //    o.render();
+    //});
 };
 
 //---------------------------------

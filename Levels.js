@@ -37,12 +37,14 @@ var r_ = 23;// rock
 var c_ = 24;// chest
 var kd = 32;//knight facing down
 var ku = 34; //knight facing up
+var swordUp = 36;
+var swordDown = 37;
 
 var scanLines = 11;
 
 var $1 = {};
 $1.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
-            [WV,o_,ee,r_,ee,kd,PV,ee,ee,ee,ee,o_,WV],//1
+            [WV,ee,ee,r_,ee,kd,PV,ee,ee,ee,ee,o_,WV],//1
             [WV,ee,ee,r_,ee,ee,PV,ee,ee,ee,bb,ee,WV],//2
             [WV,r_,r_,r_,ee,ee,PV,ee,ee,ee,bb,ee,WV],//3
             [WV,ee,ee,ee,ee,ee,PV,ee,ee,ee,bb,ee,WV],//4
@@ -52,6 +54,6 @@ $1.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
             [WV,ee,ee,ee,P1,P2,ee,ee,T2,T2,T2,ee,WV],//8
             [WV,ee,ee,ee,P3,P4,ee,ee,ee,ee,ee,ee,WV],//9
             [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//1
-            [WV,ee,ee,ee,ee,o_,ee,ee,ee,ee,ee,ee,WV],//11
+            [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//11
             [W4,WH,WH,WH,WH,WH,WH,WH,WH,WH,WH,WH,W3]//12
             ];

@@ -18,6 +18,7 @@ var paths = {
         'Rock.js',
         'Chest.js',
         'Knight.js',
+        'Swords.js',
         'Levels.js',
 		'music.js'],
     pngs:['*.png'],
