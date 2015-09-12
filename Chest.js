@@ -24,7 +24,7 @@ Chest.prototype.openChest = function() {
     this.isOpen = true;
     console.log("Chest is open");
 
-    this.tileId = 17;
+    this.tileId++;
 };
 
 Chest.prototype.pickKey = function() {
@@ -35,5 +35,5 @@ Chest.prototype.pickKey = function() {
 
     console.log("Picked key");
 
-    this.tileId = 18;
+    this.tileId++;
 };

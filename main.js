@@ -14,20 +14,7 @@ var yTiles = 13;
 
 var started = false;
 
-var initializeGrid = function (){
-    var grid = [];
-    for (var j = 0; j < yTiles; j++) {
-        var column = [];
-        for (var i = 0; i < xTiles; i++) {
-            column.push(0);
-        }
-        grid.push(column);
-    }
-
-    return grid;
-};
-
-var world = initializeGrid();
+var world = $1.world;
 
 var map = new Image();
 map.src = 'mvh.png';
@@ -55,21 +42,14 @@ var hero;
 
 
 var init = function () {
-    var background = new TiledBackground(ctx,scaledMap,2,tileSize);
+    var background = new TiledBackground(ctx,scaledMap,ee,tileSize);
     backgroundLayer.push(background);
 
-    hero = new Hero(ctx, scaledMap, tileSize, tileSize, 320, 160);
+    hero = new Hero(ctx, scaledMap, tileSize, tileSize, 6*tileSize, 5*tileSize);
     gameObjects.push(hero);
 
-    var wall = new Wall(ctx, scaledMap, 6, tileSize, tileSize, 220, 160);
-    walls.push(wall);
-    var wall = new Wall(ctx, scaledMap, 7, tileSize, tileSize, 252+32, 160);
-    walls.push(wall);
-
-    addWalls();
-    hero.addCollisionGroup(walls);
-
     loadLevel();
+
 
     var scanLines = new TiledBackground(ctx,scaledMap,11,tileSize);
     foregroundLayer.push(scanLines);
@@ -98,85 +78,54 @@ var update = function (dt) {
     }
 };
 
-var addWalls = function () {
-    // Top
-    for (var i = 1; i < xTiles - 1 ; i++) {
-        if (i == 6) continue;
-        var wall = new Wall(ctx, scaledMap, 1, tileSize, tileSize, i*tileSize, 0);
-        walls.push(wall);
-    }
-
-    // Bottom
-    for (var i = 1; i < xTiles - 1 ; i++) {
-        var wall = new Wall(ctx, scaledMap, 1, tileSize, tileSize, i*tileSize, (yTiles-1)*tileSize);
-        walls.push(wall);
-    }
-
-    // Left
-    for (var i = 1; i < xTiles - 1 ; i++) {
-        var wall = new Wall(ctx, scaledMap, 0, tileSize, tileSize, 0, i*tileSize);
-        walls.push(wall);
-    }
-
-    // Right
-    for (var i = 1; i < xTiles - 1 ; i++) {
-        var wall = new Wall(ctx, scaledMap, 0, tileSize, tileSize, (xTiles-1)*tileSize, i*tileSize);
-        walls.push(wall);
-    }
-
-    // Corners
-    var wall = new Wall(ctx, scaledMap, 12, tileSize, tileSize, 0, 0);
-    walls.push(wall);
-    wall = new Wall(ctx, scaledMap, 13, tileSize, tileSize, (xTiles-1)*tileSize, 0);
-    walls.push(wall);
-    wall = new Wall(ctx, scaledMap, 14, tileSize, tileSize, 0, (yTiles -1) * tileSize);
-    walls.push(wall);
-    wall = new Wall(ctx, scaledMap, 15, tileSize, tileSize, (xTiles-1)*tileSize, (yTiles -1) * tileSize);
-    walls.push(wall);
-};
-
 var loadLevel = function() {
-    var egg = new Egg(ctx, scaledMap, 19, tileSize, tileSize, 100, 100);
-    eggs.push(egg);
-    egg = new Egg(ctx, scaledMap, 19, tileSize, tileSize, 100, 300);
-    eggs.push(egg);
-    egg = new Egg(ctx, scaledMap, 19, tileSize, tileSize, 300, 50);
-    eggs.push(egg);
 
-    hero.eggCollisionGroup = eggs;
+    var level = $1;
+    for (var j = 0; j < yTiles; j++) {
+        for (var i = 0; i < xTiles; i++) {
+            var o = level.world[j][i];
 
-    var door = new Door(ctx, scaledMap, 4, tileSize, tileSize, 6*tileSize, 0);
-    doors.push(door);
-
-    hero.doorCollisionGroup = doors;
-
-    chest = new Chest(ctx, scaledMap, 16, tileSize, tileSize, tileSize, tileSize);
-    hero.addChest(chest);
-
-    var rock = new Rock(tileSize * 5, tileSize * 5);
-    rock.eggCollisionGroup = eggs;
-    rock.addGroupToCollisionGroup(walls);
-    rock.addGroupToCollisionGroup(doors);
-    rock.addItemToCollisionGroup(chest);
-    rocks.push(rock);
-
-    rock = new Rock(tileSize * 4, tileSize * 5);
-    rock.eggCollisionGroup = eggs;
-    rock.addGroupToCollisionGroup(walls);
-    rock.addGroupToCollisionGroup(doors);
-    rock.addItemToCollisionGroup(chest);
-
-    rocks.push(rock);
+            if (o >= 0 && o <= 10) {
+                var path = new Sprite(ctx,
+                    scaledMap, o, tileSize, tileSize, i*tileSize, j*tileSize);
+                backgroundLayer.push(path);
+            }
+            else if (o >= 12 && o <= 20) {
+                var wall = new Wall(ctx,
+                    scaledMap, o, tileSize, tileSize, i*tileSize, j*tileSize);
+                walls.push(wall);
+            }
+            else if (o == DD) {
+                var door = new Door(ctx, scaledMap, o, tileSize, tileSize, i*tileSize, j*tileSize);
+                doors.push(door);
+            }
+            else if (o == o_) {
+                var egg = new Egg(ctx, scaledMap, o, tileSize, tileSize, i*tileSize, j*tileSize);
+                eggs.push(egg);
+            }
+            else if (o == r_) {
+                var rock = new Rock(i*tileSize, j*tileSize);
+                rocks.push(rock);
+            }
+            else if (o == c_) {
+                chest = new Chest(ctx, scaledMap, o, tileSize, tileSize, i*tileSize, j*tileSize);
+            }
+        }
+    }
 
     rocks.forEach(function(r) {
+        r.eggCollisionGroup = eggs;
+        r.addGroupToCollisionGroup(walls);
+        r.addGroupToCollisionGroup(doors);
+        r.addItemToCollisionGroup(chest);
         r.addRocksToCollisionGroup(rocks);
     });
 
     hero.addRocksCollisionGroup(rocks);
-
-    var chaser = new Chaser(11*tileSize, 11*tileSize);
-    chaser.unlock();
-    gameObjects.push(chaser);
+    hero.eggCollisionGroup = eggs;
+    hero.doorCollisionGroup = doors;
+    hero.addChest(chest);
+    hero.addCollisionGroup(walls);
 };
 
 //---------------------------------

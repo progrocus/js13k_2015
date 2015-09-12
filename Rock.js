@@ -2,7 +2,7 @@
 var Rock = function(x, y) {
     this.ctx = ctx;
     this.image = scaledMap;
-    this.tileId = 24;
+    this.tileId = r_;
     this.width = tileSize;
     this.height = tileSize;
     this.x = x;
