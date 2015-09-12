@@ -175,5 +175,5 @@ Hero.prototype.win = function () {
 };
 
 Hero.prototype.fail = function () {
-
+    console.log("killed");
 };

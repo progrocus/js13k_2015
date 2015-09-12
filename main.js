@@ -98,7 +98,7 @@ var update = function (dt) {
         if (o.alive){
             s.push(o);
         }
-    })
+    });
 
     swords = s;
 };
@@ -148,6 +148,7 @@ var loadLevel = function() {
         r.addGroupToCollisionGroup(doors);
         r.addItemToCollisionGroup(chest);
         r.addRocksToCollisionGroup(rocks);
+        r.addGroupToCollisionGroup(knights);
     });
 
     hero.addRocksCollisionGroup(rocks);

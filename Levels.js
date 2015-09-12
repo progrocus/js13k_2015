@@ -46,11 +46,11 @@ var $1 = {};
 $1.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
             [WV,ee,ee,r_,ee,kd,PV,ee,ee,ee,ee,o_,WV],//1
             [WV,ee,ee,r_,ee,ee,PV,ee,ee,ee,bb,ee,WV],//2
-            [WV,r_,r_,r_,ee,ee,PV,ee,ee,ee,bb,ee,WV],//3
+            [WV,r_,r_,r_,ee,ee,PV,r_,ee,ee,bb,ee,WV],//3
             [WV,ee,ee,ee,ee,ee,PV,ee,ee,ee,bb,ee,WV],//4
             [WV,ee,PU,ee,ee,ee,PD,ee,ee,ee,bb,ee,WV],//5
             [WV,PL,PH,PR,ee,ee,ee,ee,ee,ee,bb,ee,WV],//6
-            [WV,ee,PD,ee,ee,ee,ku,c_,T1,T1,T1,ee,WV],//7
+            [WV,ee,PD,ee,ee,T1,ku,c_,T1,T1,T1,ee,WV],//7
             [WV,ee,ee,ee,P1,P2,ee,ee,T2,T2,T2,ee,WV],//8
             [WV,ee,ee,ee,P3,P4,ee,ee,ee,ee,ee,ee,WV],//9
             [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//1

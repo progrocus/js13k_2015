@@ -49,7 +49,7 @@ Sword.prototype.update = function(dt) {
     var nx = this.x;
     var ny = this.y;
 
-    var d = Math.round(dt * MAXSPEED * 5);
+    var d = Math.round(dt * MAXSPEED * 4);
 
     if (this.tileId == swordUp) {
         ny -= d;
@@ -60,6 +60,24 @@ Sword.prototype.update = function(dt) {
     }
 
     var mask = this.newCollisionMask(nx+10,ny+10,this.width-20, this.height-20);
+
+    if (this.intersects(mask, hero.bounds())) {
+        hero.fail();
+        this.alive = false;
+        return;
+    }
+
+    var collides = this.collided(walls, mask);
+    if (collides){
+        this.alive = false;
+        return;
+    }
+
+    collides = this.collided(rocks, mask);
+    if (collides){
+        this.alive = false;
+        return;
+    }
 
     this.y = ny;
 
