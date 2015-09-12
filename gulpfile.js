@@ -19,7 +19,6 @@ var paths = {
         'Chest.js',
         'Chaser.js',
         'Levels.js',
-        'astar.js',
 		'music.js'],
     pngs:['*.png'],
     htmls:['*.html'],
