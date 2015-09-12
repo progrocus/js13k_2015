@@ -14,7 +14,9 @@ var Hero = function(ctx, image, width, height, x, y) {
     this.doorCollisionGroup = [];
     this.chestToCollide = null;
     this.rocksCollisionGroup = [];
-    this.walkAnimation = [36,37,36,38];
+    this.knightCollisionGroup = [];
+
+    this.walkAnimation = [28,29,28,30];
     this.animationIndex = 0;
     this.tileId = this.walkAnimation[this.animationIndex];
     this.tickCount = 0;
@@ -76,6 +78,9 @@ Hero.prototype.update = function(dt) {
     var mask = this.newCollisionMask(nx+10,ny+10,this.width-20, this.height-20);
 
     var collided = this.collided(this.collisionGroup, mask);
+    if (collided) return;
+
+    collided = this.collided(this.knightCollisionGroup, mask);
     if (collided) return;
 
     collided = this.exitDoor(this.doorCollisionGroup, mask);

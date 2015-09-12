@@ -36,7 +36,7 @@ var eggs = [];
 var doors = [];
 var rocks = [];
 var chest;
-//var enemies = [];
+var knights = [];
 
 var hero;
 
@@ -67,13 +67,24 @@ var update = function (dt) {
         o.update(dt);
     });
 
+    knights.forEach(function(o) {
+        o.update();
+    });
+
     if (eggs.length == 0) {
         chest.openChest();
+        knights.forEach(function(k) {
+            k.unlock();
+        });
     }
 
     if (chest.hasKey == false) {
         doors.forEach(function(d) {
             d.openDoor();
+        });
+
+        knights.forEach(function(k) {
+            k.seal();
         });
     }
 };
@@ -110,6 +121,10 @@ var loadLevel = function() {
             else if (o == c_) {
                 chest = new Chest(ctx, scaledMap, o, tileSize, tileSize, i*tileSize, j*tileSize);
             }
+            else if (o == ku || o == kd) {
+                var k = new Knight(i*tileSize, j*tileSize, o);
+                knights.push(k);
+            }
         }
     }
 
@@ -126,6 +141,7 @@ var loadLevel = function() {
     hero.doorCollisionGroup = doors;
     hero.addChest(chest);
     hero.addCollisionGroup(walls);
+    hero.knightCollisionGroup = knights;
 };
 
 //---------------------------------
@@ -158,6 +174,10 @@ var render = function () {
     });
 
     rocks.forEach(function(o) {
+        o.render();
+    });
+
+    knights.forEach(function(o) {
         o.render();
     });
 
