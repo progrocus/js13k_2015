@@ -199,7 +199,7 @@
 
 
 // audiocontext, beats per minute, overall game volume
-var ac, tempo = 128, volume = 0.5;
+var ac, tempo = 120, volume = 0.2;
 
 if ( window.AudioContext || window.webkitAudioContext ) {
  ac = new ( window.AudioContext || window.webkitAudioContext )();
@@ -252,10 +252,10 @@ var Music = {
       this.bass.staccato = 0.25;
       this.bass.waveType = 'sawtooth';
       this.bass.treble.type = 'lowpass';
-      this.bass.treble.frequency.value = 2500;
-      this.bass.mid.gain.value = -2;
+      this.bass.treble.frequency.value = 1000;
+      this.bass.mid.gain.value = -5;
 
-      this.lead.smoothing = 0.06;
+      this.lead.smoothing = 0.00;
       this.lead.gain.gain.value = 0.35;
       this.lead.wet.gain.value = 1.5;
 
@@ -287,11 +287,11 @@ var Music = {
       now = this.ac.currentTime;
       delay = now + ( 60 / tempo * 16 );
       this.lead.play( now );
-      this.counterpoint.play( delay );
-      this.bass.play( delay );
-      this.kick.play( delay );
-      this.pad1.play( delay );
-      this.pad2.play( delay );
+      //this.counterpoint.play( now );
+      this.bass.play( now );
+      //this.kick.play( now );
+      //this.pad1.play( now );
+      //this.pad2.play( now );
     }
   },
 
@@ -349,79 +349,117 @@ var Music = {
   },
 
   bass: new Sequence( ac, tempo, [
-    'C2  e',
-    'C2  e',
-    'C2  e',
-    'C2  e',
-    'C2  e',
-    'C2  e',
-    'C2  e',
-    'G2  e',
-
-    'G2  e',
-    'G2  e',
-    'G2  e',
-    'G2  e',
-    'G2  e',
-    'G2  e',
-    'G2  e',
-    'E2  e',
-
-    'E2  e',
-    'E2  e',
-    'E2  e',
-    'E2  e',
-    'E2  e',
-    'E2  e',
-    'E2  e',
-    'G2  e',
-
-    'G2  e',
-    'G2  e',
-    'G2  e',
-    'D2  e',
-    'D2  e',
-    'D2  e',
-    'D2  e',
-    'C2  e'
+    'C2  h',
+    'C2  h',
+    'G2  h',
+    'G2  h',
+    'E2  h',
+    'E2  h',
+    'D2  h',
+    'D2  h',
+    //
+    //'G2  e',
+    //'G2  e',
+    //'G2  e',
+    //'G2  e',
+    //'G2  e',
+    //'G2  e',
+    //'G2  e',
+    //'E2  e',
+    //
+    //'E2  e',
+    //'E2  e',
+    //'E2  e',
+    //'E2  e',
+    //'E2  e',
+    //'E2  e',
+    //'E2  e',
+    //'G2  e',
+    //
+    //'G2  e',
+    //'G2  e',
+    //'G2  e',
+    //'D2  e',
+    //'D2  e',
+    //'D2  e',
+    //'D2  e',
+    //'C2  e'
   ]),
 
   lead: new Sequence( ac, tempo, [
-    '_  e',
-    'G4 e',
-    'G5 e',
-    'G4 e',
-    'D5 e',
-    'C5 e',
-    'B4 e',
-    'C5 e',
+    //'B3 q','D3 q','G3 q','A4 q',
+    //  //
+    //'B3 q','D3 q','G3 q','A4 q',
+    //  //
+    //'B3 q','D4 q', 'C4 q', 'b3 q',
+    //  //
+    //'A4 q', 'G3 q','A4 q','B3 q',
+    //  //
+    //'C4 q', 'G3 q','A4 q','B3 q',
+      //
+      //
+    //'D4 e','D4 e','D4 e',
+    ////
+    //'B4 e', 'A4 s','B4 s','G3 e',
+    ////
+    //'A4 e', 'D4 e', 'C4 e',
+    ////
+    //'B4 h', 'A4 e',
+    ////
+    //'D4 e', 'C4 s','B4 s', 'A4 s', 'G3 s',
+    ////
+    //'E4 e', 'C4 s','B4 s', 'A4 s', 'G3 s',
+    ////
+    //'F3 e', 'E3 s', 'D3 s', 'F3 e', 'G3 hq'
 
-    '_  e',
-    'G4 e',
-    'D5 e',
-    'E5 e',
-    'D5 e',
-    'C5 e',
-    'B4 e',
-    'A4 e',
-
-    '_  e',
-    'G4 e',
-    'G5 e',
-    'G4 e',
-    'D5 e',
-    'C5 e',
-    'B4 e',
-    'C5 e',
-
-    '_  e',
-    'G4 e',
-    'D5 e',
-    'E5 e',
-    'D5 e',
-    'B4 e',
-    'A4 e',
-    'G4 e',
+    'E3 e','G3 q','B4 e','D4 q', 'G3 e',
+    //
+    'C4 e','E4 e','F4 e','E4 e', 'C4 q', 'B4 e',
+    //
+    'C4 e','A4 e','D3 e','C4 e',
+    //
+    'B4 e','G3 e','D3 e','B4 e',
+    //
+    'F3 q','E3 q','D3 q','- e',
+    //
+    //
+    'E3 e','G3 q','B4 e','D4 q', 'G3 e',
+    //
+    'C4 e','E4 e','F4 e','E4 e', 'C4 q', 'B4 e',
+    //
+    'C4 e','A4 e','D3 e','C4 e',
+    //
+    'B4 e','G3 e','D3 e','B4 e',
+    //
+    'F3 q','E3 q','D3 q','- e',
+    //
+    //
+    'D3 e','C4 q','B4 e','A4 q', 'D3 q',
+    'C4 e','B4 e','A4 e', 'G3 e', 'A4 q',
+    //
+    'E3 e','G3 q','B4 e','D4 q', 'G3 e',
+    //
+    'C4 e','E4 e','F4 e','E4 e', 'C4 q', 'B4 e',
+    //
+    'C4 e','A4 e','D3 e','C4 e',
+    //
+    'B4 e','G3 e','D3 e','B4 e',
+    //
+    'F3 q','F3 q','G3 q','- e',
+    //
+    //
+    'D3 e','C4 q','B4 e','A4 q', 'D3 q',
+    'C4 e','B4 e','A4 e', 'G3 e', 'A4 q',
+    //
+    'E3 e','G3 q','B4 e','D4 q', 'G3 e',
+    //
+    'C4 e','E4 e','F4 e','E4 e', 'C4 q', 'B4 e',
+    //
+    'C4 e','A4 e','D3 e','C4 e',
+    //
+    'B4 e','G3 e','D3 e','B4 e',
+    //
+    'F3 q','F3 q','G3 q','- e',
   ]),
 
   counterpoint: new Sequence( ac, tempo, [
@@ -439,7 +477,7 @@ var Music = {
   ]),
 
   kick: new Sequence( ac, tempo, [
-    'G2 0.01',
+    'G1 e',
     'C2 0.19',
     '-  0.80'
   ]),

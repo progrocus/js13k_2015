@@ -21,6 +21,9 @@ map.onload = function () {
     scaledImageReady = true;
     init();
     started = true;
+
+    //Music.init();
+    //Music.play();
 };
 
 var backgroundLayer = [];
@@ -42,9 +45,9 @@ var init = function () {
     hero = new Hero(ctx, scaledMap, 28, tileSize, tileSize, 320, 160);
     gameObjects.push(hero);
 
-    var wall = new Wall(ctx, scaledMap, 0, tileSize, tileSize, 220, 160);
+    var wall = new Wall(ctx, scaledMap, 6, tileSize, tileSize, 220, 160);
     walls.push(wall);
-    var wall = new Wall(ctx, scaledMap, 0, tileSize, tileSize, 252+32, 160);
+    var wall = new Wall(ctx, scaledMap, 7, tileSize, tileSize, 252+32, 160);
     walls.push(wall);
 
     addWalls();
