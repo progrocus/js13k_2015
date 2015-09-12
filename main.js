@@ -1,6 +1,13 @@
 /**
  * Created by ehtd on 9/6/15.
  */
+
+var START = 0;
+var MENU = 1;
+var GAME = 2;
+
+var currentState = START;
+
 var canvas = document.getElementById('gameCanvas');
 var ctx = canvas.getContext('2d');
 
@@ -28,6 +35,8 @@ map.onload = function () {
     //Music.play();
 };
 
+var startLayer = [];
+
 var backgroundLayer = [];
 var foregroundLayer = [];
 var gameObjects = [];
@@ -43,14 +52,10 @@ var hero;
 
 
 var init = function () {
-    var background = new TiledBackground(ctx,scaledMap,ee,tileSize);
-    backgroundLayer.push(background);
 
-    hero = new Hero(ctx, scaledMap, tileSize, tileSize, 6*tileSize, 5*tileSize);
-    gameObjects.push(hero);
+    loadStart();
 
     loadLevel();
-
 
     var scanLines = new TiledBackground(ctx,scaledMap,11,tileSize);
     foregroundLayer.push(scanLines);
@@ -62,6 +67,13 @@ var reset = function () {
 
 var update = function (dt) {
 
+    if (currentState == GAME) {
+        updateLevel(dt);
+    }
+
+};
+
+var updateLevel = function (dt) {
     if (started == false) return;
 
     gameObjects.forEach(function(o) {
@@ -103,7 +115,20 @@ var update = function (dt) {
     swords = s;
 };
 
+var loadStart = function() {
+    var background = new TiledBackground(ctx,scaledMap,darkTile,tileSize);
+    var hero = new Hero(ctx,scaledMap, tileSize, tileSize, 190, 300);
+    startLayer.push(background);
+    startLayer.push(hero);
+};
+
 var loadLevel = function() {
+
+    var background = new TiledBackground(ctx,scaledMap,ee,tileSize);
+    backgroundLayer.push(background);
+
+    hero = new Hero(ctx, scaledMap, tileSize, tileSize, 6*tileSize, 5*tileSize);
+    gameObjects.push(hero);
 
     var level = $1;
     for (var j = 0; j < yTiles; j++) {
@@ -167,7 +192,20 @@ var render = function () {
 
     if (!scaledImageReady) return;
 
+    if (currentState == GAME) {
+        renderLevel();
+    }
+    else if (currentState == START) {
+        renderStart();
+        draw('Fantastic', 5, 120, 150);
+        draw('monster', 5, 130, 190);
+        draw('chronicles', 5, 110, 230);
+        draw('ehtd presents', 2, 160, 100);
+        draw('Z to start', 2, 170, 350);
+    }
+};
 
+var renderLevel = function() {
     backgroundLayer.forEach(function(o) {
         o.render();
     });
@@ -205,11 +243,12 @@ var render = function () {
     });
 
     // TODO: draw order according to y distance
-    //hero.render();
+};
 
-    //foregroundLayer.forEach(function(o) {
-    //    o.render();
-    //});
+var renderStart = function() {
+    startLayer.forEach(function(o){
+        o.render();
+    })
 };
 
 //---------------------------------
@@ -245,13 +284,16 @@ var loop = function () {
 document.addEventListener('keydown', function(ev) { return onkey(ev, ev.keyCode, true);  }, false);
 document.addEventListener('keyup',   function(ev) { return onkey(ev, ev.keyCode, false); }, false);
 
-var KEY = { SPACE: 32, LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40 };
+var KEY = { SPACE: 32, LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40, Z:90};
 var onkey = function (ev, key, down) {
     switch(key) {
         case KEY.LEFT:  hero.left  = down; return false;
         case KEY.RIGHT: hero.right = down; return false;
         case KEY.UP: hero.up  = down; return false;
         case KEY.DOWN: hero.down  = down; return false;
+        case KEY.Z:
+            changeState();
+            return false;
     }
 };
 
@@ -261,6 +303,12 @@ window.addEventListener("keydown", function(e) {
         e.preventDefault();
     }
 }, false);
+
+var changeState = function() {
+    if (currentState == START) {
+        currentState = GAME;
+    }
+};
 
 //---------------------------------
 //  UTILITIES

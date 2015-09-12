@@ -41,6 +41,7 @@ var swordUp = 36;
 var swordDown = 37;
 
 var scanLines = 11;
+var darkTile = 27;
 
 var $1 = {};
 $1.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0

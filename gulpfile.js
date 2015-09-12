@@ -20,6 +20,7 @@ var paths = {
         'Knight.js',
         'Swords.js',
         'Levels.js',
+        'font.js',
 		'music.js'],
     pngs:['*.png'],
     htmls:['*.html'],
