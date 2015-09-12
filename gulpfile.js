@@ -17,6 +17,7 @@ var paths = {
         'Door.js',
         'Rock.js',
         'Chest.js',
+        'Chaser.js',
         'astar.js',
 		'music.js'],
     pngs:['*.png'],

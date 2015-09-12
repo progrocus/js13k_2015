@@ -14,6 +14,21 @@ var yTiles = 13;
 
 var started = false;
 
+var initializeGrid = function (){
+    var grid = [];
+    for (var j = 0; j < yTiles; j++) {
+        var column = [];
+        for (var i = 0; i < xTiles; i++) {
+            column.push(0);
+        }
+        grid.push(column);
+    }
+
+    return grid;
+};
+
+var world = initializeGrid();
+
 var map = new Image();
 map.src = 'mvh.png';
 map.onload = function () {
@@ -34,6 +49,7 @@ var eggs = [];
 var doors = [];
 var rocks = [];
 var chest;
+//var enemies = [];
 
 var hero;
 
@@ -157,6 +173,10 @@ var loadLevel = function() {
     });
 
     hero.addRocksCollisionGroup(rocks);
+
+    var chaser = new Chaser(11*tileSize, 11*tileSize);
+    chaser.unlock();
+    gameObjects.push(chaser);
 };
 
 //---------------------------------
@@ -192,8 +212,12 @@ var render = function () {
         o.render();
     });
 
+    gameObjects.forEach(function(o) {
+        o.render();
+    });
+
     // TODO: draw order according to y distance
-    hero.render();
+    //hero.render();
 
     foregroundLayer.forEach(function(o) {
         o.render();
