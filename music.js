@@ -199,7 +199,7 @@
 
 
 // audiocontext, beats per minute, overall game volume
-var ac, tempo = 120, volume = 0.2;
+var ac, tempo = 80, volume = 0.2;
 
 if ( window.AudioContext || window.webkitAudioContext ) {
  ac = new ( window.AudioContext || window.webkitAudioContext )();
@@ -263,11 +263,11 @@ var Music = {
       this.counterpoint.gain.gain.value = 0.22;
 
       this.pad1.gain.gain.value = 0.25;
-      this.pad1.wet.gain.value = 3;
+      this.pad1.wet.gain.value = 1;
       this.pad1.waveType = 'sawtooth';
 
       this.pad2.gain.gain.value = 0.20;
-      this.pad2.wet.gain.value = 3;
+      this.pad2.wet.gain.value = 1;
       this.pad2.waveType = 'sawtooth';
 
       this.kick.waveType = 'sine';
@@ -356,110 +356,53 @@ var Music = {
     'E2  h',
     'E2  h',
     'D2  h',
-    'D2  h',
-    //
-    //'G2  e',
-    //'G2  e',
-    //'G2  e',
-    //'G2  e',
-    //'G2  e',
-    //'G2  e',
-    //'G2  e',
-    //'E2  e',
-    //
-    //'E2  e',
-    //'E2  e',
-    //'E2  e',
-    //'E2  e',
-    //'E2  e',
-    //'E2  e',
-    //'E2  e',
-    //'G2  e',
-    //
-    //'G2  e',
-    //'G2  e',
-    //'G2  e',
-    //'D2  e',
-    //'D2  e',
-    //'D2  e',
-    //'D2  e',
-    //'C2  e'
+    'D2  h'
   ]),
 
   lead: new Sequence( ac, tempo, [
-    //'B3 q','D3 q','G3 q','A4 q',
-    //  //
-    //'B3 q','D3 q','G3 q','A4 q',
-    //  //
-    //'B3 q','D4 q', 'C4 q', 'b3 q',
-    //  //
-    //'A4 q', 'G3 q','A4 q','B3 q',
-    //  //
-    //'C4 q', 'G3 q','A4 q','B3 q',
+    'B3 q','D3 q','G3 q','A4 q',
       //
+    'B3 q','D3 q','G3 q','A4 q',
       //
-    //'D4 e','D4 e','D4 e',
-    ////
-    //'B4 e', 'A4 s','B4 s','G3 e',
-    ////
-    //'A4 e', 'D4 e', 'C4 e',
-    ////
-    //'B4 h', 'A4 e',
-    ////
-    //'D4 e', 'C4 s','B4 s', 'A4 s', 'G3 s',
-    ////
-    //'E4 e', 'C4 s','B4 s', 'A4 s', 'G3 s',
-    ////
-    //'F3 e', 'E3 s', 'D3 s', 'F3 e', 'G3 hq'
+    'B3 q','D4 q', 'C4 q', 'b3 q',
+      //
+    'A4 q', 'G3 q','A4 q','B3 q',
+      //
+    'C4 q', 'G3 q','A4 q','B3 q',
+      //
+    'D4 e','D4 e','D4 e',
+    //
+    'B4 e', 'A4 s','B4 s','G3 e',
+    //
+    'A4 e', 'D4 e', 'C4 e',
+    //
+    'B4 h', 'A4 e',
+    //
+    'E3 e','G3 q','B4 e','D4 q', 'G3 e',
+    //
+    'C4 e','E4 e','F4 e','E4 e', 'C4 q', 'B4 e',
+    //
+    'C4 e','A4 e','D3 e','C4 e',
+    //
+    'B4 e','G3 e','D3 e','B4 e',
+    //
+    'F3 q','E3 q','D3 q','- e',
+    //
+    //
+    'D3 e','C4 q','B4 e','A4 q', 'D3 q',
+    'C4 e','B4 e','A4 e', 'G3 e', 'A4 q',
+    //
+    'E3 e','G3 q','B4 e','D4 q', 'G3 e',
+    //
+    'C4 e','E4 e','F4 e','E4 e', 'C4 q', 'B4 e',
+    //
+    'C4 e','A4 e','D3 e','C4 e',
+    //
+    'B4 e','G3 e','D3 e','B4 e',
+    //
+    'F3 q','F3 q','G3 q','- e'
+    //
 
-    'E3 e','G3 q','B4 e','D4 q', 'G3 e',
-    //
-    'C4 e','E4 e','F4 e','E4 e', 'C4 q', 'B4 e',
-    //
-    'C4 e','A4 e','D3 e','C4 e',
-    //
-    'B4 e','G3 e','D3 e','B4 e',
-    //
-    'F3 q','E3 q','D3 q','- e',
-    //
-    //
-    'E3 e','G3 q','B4 e','D4 q', 'G3 e',
-    //
-    'C4 e','E4 e','F4 e','E4 e', 'C4 q', 'B4 e',
-    //
-    'C4 e','A4 e','D3 e','C4 e',
-    //
-    'B4 e','G3 e','D3 e','B4 e',
-    //
-    'F3 q','E3 q','D3 q','- e',
-    //
-    //
-    'D3 e','C4 q','B4 e','A4 q', 'D3 q',
-    'C4 e','B4 e','A4 e', 'G3 e', 'A4 q',
-    //
-    'E3 e','G3 q','B4 e','D4 q', 'G3 e',
-    //
-    'C4 e','E4 e','F4 e','E4 e', 'C4 q', 'B4 e',
-    //
-    'C4 e','A4 e','D3 e','C4 e',
-    //
-    'B4 e','G3 e','D3 e','B4 e',
-    //
-    'F3 q','F3 q','G3 q','- e',
-    //
-    //
-    'D3 e','C4 q','B4 e','A4 q', 'D3 q',
-    'C4 e','B4 e','A4 e', 'G3 e', 'A4 q',
-    //
-    'E3 e','G3 q','B4 e','D4 q', 'G3 e',
-    //
-    'C4 e','E4 e','F4 e','E4 e', 'C4 q', 'B4 e',
-    //
-    'C4 e','A4 e','D3 e','C4 e',
-    //
-    'B4 e','G3 e','D3 e','B4 e',
-    //
-    'F3 q','F3 q','G3 q','- e',
   ]),
 
   counterpoint: new Sequence( ac, tempo, [

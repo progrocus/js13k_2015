@@ -32,8 +32,7 @@ map.onload = function () {
     init();
     started = true;
 
-    //Music.init();
-    //Music.play();
+    Music.init();
 };
 
 var startLayer = [];
@@ -96,6 +95,7 @@ var updateLevel = function (dt) {
 
     if (hero.dead) {
         currentState = DEAD;
+        Music.stop();
         reset();
         loadLevel();
         return;
@@ -110,6 +110,7 @@ var updateLevel = function (dt) {
 
         loadLevel();
         currentState = BETWEEN;
+        Music.stop();
         return;
     }
 
@@ -428,12 +429,14 @@ var changeState = function() {
         currentState = BETWEEN;
     } else if (currentState == DEAD) {
         currentState = GAME;
+        Music.play();
     }
 };
 
 var beginLevel = function() {
     if (currentState == BETWEEN) {
         currentState = GAME;
+        Music.play();
     }
 };
 
