@@ -109,7 +109,7 @@ var updateLevel = function (dt) {
         }
 
         loadLevel();
-        currentState = GAME;
+        currentState = BETWEEN;
         return;
     }
 
