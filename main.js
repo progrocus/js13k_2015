@@ -16,8 +16,7 @@ var ctx = canvas.getContext('2d');
 var scaledImageReady = false;
 
 var scaledMap;
-var scale = 2;
-var tileSize = 16 * scale;
+
 var xTiles = 13;
 var yTiles = 13;
 
@@ -96,8 +95,10 @@ var updateLevel = function (dt) {
         reset();
         loadLevel();
         return;
-    } else if (hero.win) {
-        currentState = NEW_LEVEL;
+    } else if (hero.completedLevel) {
+        reset();
+        loadLevel();
+        currentState = GAME;
         return;
     }
 
@@ -156,13 +157,15 @@ var loadDead = function() {
 
 var loadLevel = function() {
 
+    var level = levels[currentLevel];
+
     var background = new TiledBackground(ctx,scaledMap,ee,tileSize);
     backgroundLayer.push(background);
 
-    hero = new Hero(ctx, scaledMap, tileSize, tileSize, 6*tileSize, 5*tileSize);
+    hero = new Hero(ctx, scaledMap, tileSize, tileSize, level.x, level.y);
     gameObjects.push(hero);
 
-    var level = $1;
+
     for (var j = 0; j < yTiles; j++) {
         for (var i = 0; i < xTiles; i++) {
             var o = level.world[j][i];

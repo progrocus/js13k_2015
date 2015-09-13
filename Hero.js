@@ -21,7 +21,7 @@ var Hero = function(ctx, image, width, height, x, y) {
     this.tileId = this.walkAnimation[this.animationIndex];
     this.tickCount = 0;
     this.ticksPerFrame = 8;
-    this.win = false;
+    this.completedLevel = false;
     this.dead = false;
 };
 
@@ -174,7 +174,7 @@ Hero.prototype.exitDoor = function (group, mask) {
 
 Hero.prototype.win = function () {
     console.log("win");
-    this.win = true;
+    this.completedLevel = true;
 };
 
 Hero.prototype.fail = function () {

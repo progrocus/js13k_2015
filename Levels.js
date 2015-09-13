@@ -2,8 +2,9 @@
  * Created by ehtd on 9/11/15.
  */
 
-var level;
-
+var currentLevel = 0;
+var scale = 2;
+var tileSize = 16 * scale;
 // Sprite keys
 
 // Walls
@@ -58,3 +59,7 @@ $1.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
             [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//11
             [W4,WH,WH,WH,WH,WH,WH,WH,WH,WH,WH,WH,W3]//12
             ];
+$1.x = 1*tileSize;
+$1.y = 5*tileSize;
+
+var levels = [$1];
