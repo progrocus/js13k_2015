@@ -181,3 +181,13 @@ Hero.prototype.fail = function () {
     console.log("killed");
     this.dead = true;
 };
+
+Hero.prototype.bounds = function () {
+
+    var bounds = {};
+    bounds.left = this.x+10;
+    bounds.top = this.y+10;
+    bounds.right = this.x + this.width-20;
+    bounds.bottom = this.y + this.height-20;
+    return bounds;
+};
