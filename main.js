@@ -3,12 +3,11 @@
  */
 
 var START = 0;
-var MENU = 1;
 var GAME = 2;
 var DEAD = 3;
-var NEW_LEVEL = 4;
+var WIN = 4;
 
-var currentState = GAME;
+var currentState = START;
 
 var canvas = document.getElementById('gameCanvas');
 var ctx = canvas.getContext('2d');
@@ -38,6 +37,7 @@ map.onload = function () {
 
 var startLayer = [];
 var deadLayer = [];
+var winLayer = [];
 
 var backgroundLayer = [];
 var foregroundLayer = [];
@@ -57,6 +57,7 @@ var init = function () {
 
     loadStart();
     loadDead();
+    loadWin();
 
     loadLevel();
 
@@ -98,7 +99,12 @@ var updateLevel = function (dt) {
     } else if (hero.completedLevel) {
         reset();
         currentLevel++;
-        // TODO: max level check
+
+        if (currentLevel >= levels.length) {
+            currentState = WIN;
+            return;
+        }
+
         loadLevel();
         currentState = GAME;
         return;
@@ -155,6 +161,13 @@ var loadDead = function() {
     var hero = new Hero(ctx,scaledMap, tileSize, tileSize, 190, 300);
     deadLayer.push(background);
     deadLayer.push(hero);
+};
+
+var loadWin = function() {
+    var background = new TiledBackground(ctx,scaledMap,darkTile,tileSize);
+    var hero = new Hero(ctx,scaledMap, tileSize, tileSize, 190, 300);
+    winLayer.push(background);
+    winLayer.push(hero);
 };
 
 var loadLevel = function() {
@@ -239,6 +252,9 @@ var render = function () {
     else if (currentState == DEAD) {
         renderDead();
     }
+    else if (currentState == WIN) {
+        renderWin();
+    }
 };
 
 var renderLevel = function() {
@@ -303,6 +319,16 @@ var renderDead = function () {
     draw('Z to revive', 2, 160, 350);
 };
 
+var renderWin = function () {
+    winLayer.forEach(function(o){
+        o.render();
+    });
+
+    draw('fantastic', 5, 120, 150);
+    draw('Game completed ', 2, 150, 100);
+    draw('You are ', 2, 180, 120);
+};
+
 //---------------------------------
 //  GAME LOOP
 //---------------------------------
@@ -362,6 +388,7 @@ var changeState = function() {
     } else if (currentState == DEAD) {
         currentState = GAME;
     }
+
 };
 
 //---------------------------------
