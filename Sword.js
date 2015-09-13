@@ -86,4 +86,16 @@ Sword.prototype.update = function(dt) {
     }
 };
 
+Sword.prototype.collided = function (group, mask) {
+
+    var collided = false;
+    for (var i = 0; i < group.length; i++) {
+        var c = group[i];
+        if (this.intersects(mask, c.bounds()) && c.tileId != bb){
+            collided = true;
+            break;
+        }
+    }
+    return collided;
+};
 
