@@ -185,9 +185,9 @@ Hero.prototype.fail = function () {
 Hero.prototype.bounds = function () {
 
     var bounds = {};
-    bounds.left = this.x+10;
-    bounds.top = this.y+10;
-    bounds.right = this.x + this.width-20;
-    bounds.bottom = this.y + this.height-20;
+    bounds.left = this.x+5;
+    bounds.top = this.y+5;
+    bounds.right = this.x + this.width-10;
+    bounds.bottom = this.y + this.height-10;
     return bounds;
 };

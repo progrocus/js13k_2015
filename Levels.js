@@ -2,7 +2,7 @@
  * Created by ehtd on 9/11/15.
  */
 
-var currentLevel = 0;
+var currentLevel = 5;
 var scale = 2;
 var tileSize = 16 * scale;
 // Sprite keys
@@ -163,7 +163,7 @@ $6.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
             [WV,ee,ee,ee,T2,ee,ee,T1,T1,T1,T2,T1,WV],//4
             [WV,ee,ee,ee,bb,bb,bb,T1,T1,ee,ee,ee,WV],//5
             [WV,T1,ee,ee,r_,kd,kd,kd,kd,r_,ee,ee,WV],//6
-            [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//7
+            [WV,ee,ee,ee,ee,ee,ee,ee,ee,r_,ee,ee,WV],//7
             [WV,ee,ee,ee,ee,ee,ee,ee,ee,r_,ee,ee,WV],//8
             [WV,ee,ee,ee,ee,ee,ee,ee,ee,T1,r_,ee,WV],//9
             [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,r_,ee,WV],//1

@@ -18,7 +18,7 @@ var paths = {
         'Rock.js',
         'Chest.js',
         'Knight.js',
-        'Swords.js',
+        'Sword.js',
         'Levels.js',
         'font.js',
 		'music.js'],

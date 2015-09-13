@@ -55,11 +55,9 @@ Sword.prototype.update = function(dt) {
         ny -= d;
     } else if (this.tileId == swordDown) {
         ny += d;
-    } else {
-        1;
     }
 
-    var mask = this.newCollisionMask(nx+10,ny+10,this.width-20, this.height-20);
+    var mask = this.newCollisionMask(nx+5,ny+5,this.width-20, this.height-20);
 
     if (this.intersects(mask, hero.bounds())) {
         hero.fail();
