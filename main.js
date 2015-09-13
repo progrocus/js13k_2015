@@ -6,8 +6,9 @@ var START = 0;
 var GAME = 2;
 var DEAD = 3;
 var WIN = 4;
+var BETWEEN = 5;
 
-var currentState = START;
+var currentState = BETWEEN;
 
 var canvas = document.getElementById('gameCanvas');
 var ctx = canvas.getContext('2d');
@@ -38,6 +39,7 @@ map.onload = function () {
 var startLayer = [];
 var deadLayer = [];
 var winLayer = [];
+var betweenLevelsLayer = [];
 
 var backgroundLayer = [];
 var foregroundLayer = [];
@@ -58,6 +60,7 @@ var init = function () {
     loadStart();
     loadDead();
     loadWin();
+    loadBetweenLevels();
 
     loadLevel();
 
@@ -170,6 +173,13 @@ var loadWin = function() {
     winLayer.push(hero);
 };
 
+var loadBetweenLevels = function() {
+    var background = new TiledBackground(ctx,scaledMap,darkTile,tileSize);
+    var hero = new Hero(ctx,scaledMap, tileSize, tileSize, 190, 300);
+    betweenLevelsLayer.push(background);
+    betweenLevelsLayer.push(hero);
+};
+
 var loadLevel = function() {
 
     var level = levels[currentLevel];
@@ -255,6 +265,9 @@ var render = function () {
     else if (currentState == WIN) {
         renderWin();
     }
+    else if (currentState == BETWEEN) {
+        renderBetween();
+    }
 };
 
 var renderLevel = function() {
@@ -330,6 +343,20 @@ var renderWin = function () {
     draw('You are ', 2, 180, 120);
 };
 
+var renderBetween = function () {
+    betweenLevelsLayer.forEach(function(o){
+        o.render();
+    });
+
+    var level = levels[currentLevel];
+    draw(level.p1, 5, 120, 150);
+    draw(level.p2, 2, 50, 230);
+    draw(level.p3, 2, 50, 250);
+    draw(level.p4, 2, 50, 270);
+    //draw('You are ', 2, 180, 120);
+    draw('X to start chapter', 2, 140, 350);
+};
+
 //---------------------------------
 //  GAME LOOP
 //---------------------------------
@@ -363,7 +390,7 @@ var loop = function () {
 document.addEventListener('keydown', function(ev) { return onkey(ev, ev.keyCode, true);  }, false);
 document.addEventListener('keyup',   function(ev) { return onkey(ev, ev.keyCode, false); }, false);
 
-var KEY = { SPACE: 32, LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40, Z:90, R:82};
+var KEY = { SPACE: 32, LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40, Z:90, R:82, X:88};
 var onkey = function (ev, key, down) {
     switch(key) {
         case KEY.LEFT:  hero.left  = down; return false;
@@ -375,6 +402,9 @@ var onkey = function (ev, key, down) {
             return false;
         case KEY.R:
             restartLevel();
+            return false;
+        case KEY.X:
+            beginLevel();
             return false;
     }
 };
@@ -395,8 +425,14 @@ var restartLevel = function () {
 
 var changeState = function() {
     if (currentState == START) {
-        currentState = GAME;
+        currentState = BETWEEN;
     } else if (currentState == DEAD) {
+        currentState = GAME;
+    }
+};
+
+var beginLevel = function() {
+    if (currentState == BETWEEN) {
         currentState = GAME;
     }
 };

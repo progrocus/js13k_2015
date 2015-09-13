@@ -2,7 +2,7 @@
  * Created by ehtd on 9/11/15.
  */
 
-var currentLevel = 0;
+var currentLevel = 3;
 var scale = 2;
 var tileSize = 16 * scale;
 // Sprite keys
@@ -62,6 +62,10 @@ $1.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
 ];
 $1.x = 6*tileSize;
 $1.y = 7*tileSize;
+$1.p1 = 'Chapter 1:';
+$1.p2 = '      Humans have raided our village';
+$1.p3 = '             They stole our future';
+$1.p4 = '              Help me get it back';
 
 var $2 = {};
 $2.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
@@ -80,6 +84,10 @@ $2.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
 ];
 $2.x = 1*tileSize;
 $2.y = 5*tileSize;
+$2.p1 = 'Chapter 2:';
+$2.p2 = '            We are making progress';
+$2.p3 = '          but obstacles are on our way';
+$2.p4 = '';
 
 var $3 = {};
 $3.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
@@ -98,6 +106,10 @@ $3.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
 ];
 $3.x = 2*tileSize;
 $3.y = 5*tileSize;
+$3.p1 = 'Chapter 3:';
+$3.p2 = '         They know we are coming';
+$3.p3 = '            this will not be easy';
+$3.p4 = '';
 
 var $4 = {};
 $4.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
@@ -116,6 +128,10 @@ $4.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
 ];
 $4.x = 1*tileSize;
 $4.y = 5*tileSize;
+$4.p1 = 'Chapter 4:';
+$4.p2 = '   we are getting closer to their town';
+$4.p3 = '             they are more than us';
+$4.p4 = '               but we are smarter';
 
 var $5 = {};
 $5.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
@@ -134,6 +150,10 @@ $5.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
 ];
 $5.x = 1*tileSize;
 $5.y = 10*tileSize;
+$5.p1 = 'Chapter 5:';
+$5.p2 = '   we are getting closer to their town';
+$5.p3 = '             they are more than us';
+$5.p4 = '               but we are smarter';
 
 var $6 = {};
 $6.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
