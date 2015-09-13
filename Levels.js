@@ -2,7 +2,7 @@
  * Created by ehtd on 9/11/15.
  */
 
-var currentLevel = 3;
+var currentLevel = 0;
 var scale = 2;
 var tileSize = 16 * scale;
 // Sprite keys
@@ -151,9 +151,9 @@ $5.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
 $5.x = 1*tileSize;
 $5.y = 10*tileSize;
 $5.p1 = 'Chapter 5:';
-$5.p2 = '   we are getting closer to their town';
-$5.p3 = '             they are more than us';
-$5.p4 = '               but we are smarter';
+$5.p2 = '               for the last time';
+$5.p3 = '         we are not killing anyone';
+$5.p4 = '              we are not savages';
 
 var $6 = {};
 $6.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
@@ -172,6 +172,10 @@ $6.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
 ];
 $6.x = 10*tileSize;
 $6.y = 7*tileSize;
+$6.p1 = 'Chapter 6:';
+$6.p2 = '               we are surrounded';
+$6.p3 = '          do not abandon me please';
+$6.p4 = '              we are almost done';
 
 var $7 = {};
 $7.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
@@ -190,5 +194,9 @@ $7.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
 ];
 $7.x = 6*tileSize;
 $7.y = 4*tileSize;
+$7.p1 = '  FINAL:';
+$7.p2 = '             its time to go home';
+$7.p3 = '                thanks for all';
+$7.p4 = '                       :)';
 
 var levels = [$1,$2,$3,$4,$5,$6,$7];

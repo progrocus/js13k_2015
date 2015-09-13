@@ -8,7 +8,7 @@ var DEAD = 3;
 var WIN = 4;
 var BETWEEN = 5;
 
-var currentState = BETWEEN;
+var currentState = START;
 
 var canvas = document.getElementById('gameCanvas');
 var ctx = canvas.getContext('2d');
