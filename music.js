@@ -232,18 +232,11 @@ var Music = {
       this.osc.connect( this.compressor );
       this.osc.start();
 
-      this.kick.wet.connect( this.reverb );
       this.bass.wet.connect( this.reverb );
       this.lead.wet.connect( this.reverb );
-      this.counterpoint.wet.connect( this.reverb );
-      this.pad1.wet.connect( this.reverb );
-      this.pad2.wet.connect( this.reverb );
-      this.kick.dry.connect( this.compressor );
+
       this.bass.dry.connect( this.compressor );
       this.lead.dry.connect( this.compressor );
-      this.counterpoint.dry.connect( this.compressor );
-      this.pad1.dry.connect( this.compressor );
-      this.pad2.dry.connect( this.compressor );
 
       this.compressor.ratio.value = 4;
       this.compressor.threshold.value = -12;
@@ -259,25 +252,6 @@ var Music = {
       this.lead.gain.gain.value = 0.35;
       this.lead.wet.gain.value = 1.5;
 
-      this.counterpoint.smoothing = 0.06;
-      this.counterpoint.gain.gain.value = 0.22;
-
-      this.pad1.gain.gain.value = 0.25;
-      this.pad1.wet.gain.value = 1;
-      this.pad1.waveType = 'sawtooth';
-
-      this.pad2.gain.gain.value = 0.20;
-      this.pad2.wet.gain.value = 1;
-      this.pad2.waveType = 'sawtooth';
-
-      this.kick.waveType = 'sine';
-      this.kick.smoothing = 0.8;
-      this.kick.gain.gain.value = 2.0;
-      this.kick.bass.frequency.value = 60;
-      this.kick.bass.gain.value = 10;
-      this.kick.mid.frequency.value = 100;
-      this.kick.mid.gain.value = 5;
-      this.kick.wet.gain.value = 0.3;
     }
   },
 
@@ -287,46 +261,14 @@ var Music = {
       now = this.ac.currentTime;
       delay = now + ( 60 / tempo * 16 );
       this.lead.play( now );
-      //this.counterpoint.play( now );
       this.bass.play( now );
-      //this.kick.play( now );
-      //this.pad1.play( now );
-      //this.pad2.play( now );
     }
   },
 
   stop: function() {
     if ( this.ac ) {
       this.lead.stop();
-      this.counterpoint.stop();
       this.bass.stop();
-      this.kick.stop();
-      this.pad1.stop();
-      this.pad2.stop();
-    }
-  },
-
-  mute: function() {
-    if ( this.ac ) {
-      if ( this.muted ) {
-        this.muted = false;
-        this.output.gain.value = volume;
-      } else {
-        this.muted = true;
-        this.output.gain.value = 0;
-      }
-    }
-  },
-
-  collide: function( descend ) {
-    if ( this.ac ) {
-      this.collision1.stop();
-      this.collision2.stop();
-      if ( descend ) {
-        this.collision2.play();
-      } else {
-        this.collision1.play();
-      }
     }
   },
 
@@ -403,44 +345,8 @@ var Music = {
     'F3 q','F3 q','G3 q','- e'
     //
 
-  ]),
-
-  counterpoint: new Sequence( ac, tempo, [
-    'E4 3',
-    'F#4 e',
-    'D4 3.5',
-    'B3 e',
-    'G4 3.5',
-    'E4 e',
-    'B4 h',
-    'A4 q',
-    'G4  e',
-    'F#4 e',
-    'E4 e'
-  ]),
-
-  kick: new Sequence( ac, tempo, [
-    'G1 e',
-    'C2 0.19',
-    '-  0.80'
-  ]),
-
-  pad1: new Sequence( ac, tempo, [
-    'G3 3.5',
-    'G3 4',
-    'G3 4',
-    'G3 4',
-    'G3 0.5'
-  ]),
-
-  pad2: new Sequence( ac, tempo, [
-    'C4 3.5',
-    'B3 4',
-    'E4 4',
-    'B3 2',
-    'D4 2',
-    'C4 0.5'
-  ]),
+  ])
+    ,
 
   collision1: new Sequence( ac, 220, [
     'G3 s',

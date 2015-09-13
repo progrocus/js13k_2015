@@ -22,8 +22,6 @@ var yTiles = 13;
 
 var started = false;
 
-var world = $1.world;
-
 var map = new Image();
 map.src = 'mvh.png';
 map.onload = function () {
