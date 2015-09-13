@@ -44,43 +44,6 @@ var swordDown = 37;
 var scanLines = 11;
 var darkTile = 27;
 
-// Reference level
-var $10 = {};
-$10.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
-            [WV,ee,ee,r_,ee,kd,PV,ee,ee,ee,ee,o_,WV],//1
-            [WV,ee,ee,r_,ee,ee,PV,ee,ee,ee,bb,ee,WV],//2
-            [WV,r_,r_,r_,ee,ee,PV,r_,ee,ee,bb,ee,WV],//3
-            [WV,ee,ee,ee,ee,ee,PV,ee,ee,ee,bb,ee,WV],//4
-            [WV,ee,PU,ee,ee,ee,PD,ee,ee,ee,bb,ee,WV],//5
-            [WV,PL,PH,PR,ee,ee,ee,ee,ee,ee,bb,ee,WV],//6
-            [WV,ee,PD,ee,ee,T1,ku,c_,T1,T1,T1,ee,WV],//7
-            [WV,ee,ee,ee,P1,P2,ee,ee,T2,T2,T2,ee,WV],//8
-            [WV,ee,ee,ee,P3,P4,ee,ee,ee,ee,ee,ee,WV],//9
-            [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//1
-            [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//11
-            [W4,WH,WH,WH,WH,WH,WH,WH,WH,WH,WH,WH,W3]//12
-            ];
-$10.x = 1*tileSize;
-$10.y = 5*tileSize;
-
-var $0 = {};
-$0.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
-    [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//1
-    [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//2
-    [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//3
-    [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//4
-    [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//5
-    [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//6
-    [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//7
-    [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//8
-    [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//9
-    [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//1
-    [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//11
-    [W4,WH,WH,WH,WH,WH,WH,WH,WH,WH,WH,WH,W3]//12
-];
-$0.x = 1*tileSize;
-$0.y = 5*tileSize;
-
 // Levels
 var $1 = {};
 $1.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
@@ -190,4 +153,22 @@ $6.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
 $6.x = 10*tileSize;
 $6.y = 7*tileSize;
 
-var levels = [$6];
+var $7 = {};
+$7.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
+            [WV,o_,kd,kd,kd,kd,PD,kd,kd,kd,kd,T1,WV],//1
+            [WV,PU,bb,bb,bb,bb,ee,bb,bb,bb,bb,T1,WV],//2
+            [WV,PV,bb,bb,bb,bb,ee,bb,bb,bb,bb,T1,WV],//3
+            [WV,P3,PH,PH,PH,PH,PH,PH,PH,PH,PR,T1,WV],//4
+            [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,T1,WV],//5
+            [WV,ee,r_,bb,bb,r_,bb,r_,bb,bb,r_,T2,WV],//6
+            [WV,ee,PL,PH,PH,PH,PH,PH,PH,PH,PR,T1,WV],//7
+            [WV,ee,ee,bb,bb,ee,bb,ee,bb,bb,ee,T1,WV],//8
+            [WV,ee,PL,PH,PH,PH,PH,PH,PH,PH,PR,T1,WV],//9
+            [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,T2,WV],//1
+            [WV,ee,PL,PH,PH,PH,PH,PH,PH,PH,PR,c_,WV],//11
+            [W4,WH,WH,WH,WH,WH,WH,WH,WH,WH,WH,WH,W3]//12
+];
+$7.x = 6*tileSize;
+$7.y = 4*tileSize;
+
+var levels = [$1,$2,$3,$4,$5,$6,$7];

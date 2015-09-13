@@ -7,7 +7,7 @@ var GAME = 2;
 var DEAD = 3;
 var WIN = 4;
 
-var currentState = GAME;
+var currentState = START;
 
 var canvas = document.getElementById('gameCanvas');
 var ctx = canvas.getContext('2d');
