@@ -2,7 +2,7 @@
  * Created by ehtd on 9/11/15.
  */
 
-var currentLevel = 5;
+var currentLevel = 0;
 var scale = 2;
 var tileSize = 16 * scale;
 // Sprite keys
