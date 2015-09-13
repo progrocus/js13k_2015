@@ -154,4 +154,22 @@ $4.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
 $4.x = 1*tileSize;
 $4.y = 5*tileSize;
 
-var levels = [$4];
+var $5 = {};
+$5.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
+            [WV,T2,T2,ee,ee,ee,PV,bb,bb,bb,ee,ee,WV],//1
+            [WV,T2,T2,ee,ee,ee,PV,bb,bb,ee,ee,ee,WV],//2
+            [WV,T2,ee,ee,ee,ee,P3,PH,PR,ee,T1,ee,WV],//3
+            [WV,bb,PU,bb,T1,T2,bb,bb,o_,ee,T1,ee,WV],//4
+            [WV,bb,PD,bb,kd,bb,bb,bb,ee,ee,T1,o_,WV],//5
+            [WV,kd,ee,ee,ee,ee,ee,bb,ee,T2,T1,T1,WV],//6
+            [WV,ee,ee,ee,ee,ee,ee,r_,ee,ee,T2,o_,WV],//7
+            [WV,ee,r_,ee,ee,ee,T2,bb,T1,ee,ee,ee,WV],//8
+            [WV,ee,ee,ee,ee,ee,bb,bb,bb,ee,T2,T2,WV],//9
+            [WV,ee,ee,ee,ee,ee,bb,bb,bb,ee,T2,T2,WV],//1
+            [WV,c_,ee,ee,ku,ee,bb,bb,bb,ee,T2,T2,WV],//11
+            [W4,WH,WH,WH,WH,WH,WH,WH,WH,WH,WH,WH,W3]//12
+];
+$5.x = 1*tileSize;
+$5.y = 10*tileSize;
+
+var levels = [$5];

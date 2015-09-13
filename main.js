@@ -7,7 +7,7 @@ var GAME = 2;
 var DEAD = 3;
 var WIN = 4;
 
-var currentState = START;
+var currentState = GAME;
 
 var canvas = document.getElementById('gameCanvas');
 var ctx = canvas.getContext('2d');
@@ -295,6 +295,7 @@ var renderLevel = function() {
     });
 
     // TODO: draw order according to y distance
+    draw('r to restart level', 2, 140, 396);
 };
 
 var renderStart = function() {
@@ -362,7 +363,7 @@ var loop = function () {
 document.addEventListener('keydown', function(ev) { return onkey(ev, ev.keyCode, true);  }, false);
 document.addEventListener('keyup',   function(ev) { return onkey(ev, ev.keyCode, false); }, false);
 
-var KEY = { SPACE: 32, LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40, Z:90};
+var KEY = { SPACE: 32, LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40, Z:90, R:82};
 var onkey = function (ev, key, down) {
     switch(key) {
         case KEY.LEFT:  hero.left  = down; return false;
@@ -371,6 +372,9 @@ var onkey = function (ev, key, down) {
         case KEY.DOWN: hero.down  = down; return false;
         case KEY.Z:
             changeState();
+            return false;
+        case KEY.R:
+            restartLevel();
             return false;
     }
 };
@@ -382,13 +386,19 @@ window.addEventListener("keydown", function(e) {
     }
 }, false);
 
+var restartLevel = function () {
+    if (currentState == GAME) {
+        reset();
+        loadLevel();
+    }
+};
+
 var changeState = function() {
     if (currentState == START) {
         currentState = GAME;
     } else if (currentState == DEAD) {
         currentState = GAME;
     }
-
 };
 
 //---------------------------------
