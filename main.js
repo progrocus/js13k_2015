@@ -8,7 +8,7 @@ var GAME = 2;
 var DEAD = 3;
 var NEW_LEVEL = 4;
 
-var currentState = START;
+var currentState = GAME;
 
 var canvas = document.getElementById('gameCanvas');
 var ctx = canvas.getContext('2d');
@@ -97,6 +97,8 @@ var updateLevel = function (dt) {
         return;
     } else if (hero.completedLevel) {
         reset();
+        currentLevel++;
+        // TODO: max level check
         loadLevel();
         currentState = GAME;
         return;

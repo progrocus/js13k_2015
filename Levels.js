@@ -44,8 +44,9 @@ var swordDown = 37;
 var scanLines = 11;
 var darkTile = 27;
 
-var $1 = {};
-$1.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
+// Reference level
+var $10 = {};
+$10.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
             [WV,ee,ee,r_,ee,kd,PV,ee,ee,ee,ee,o_,WV],//1
             [WV,ee,ee,r_,ee,ee,PV,ee,ee,ee,bb,ee,WV],//2
             [WV,r_,r_,r_,ee,ee,PV,r_,ee,ee,bb,ee,WV],//3
@@ -59,7 +60,44 @@ $1.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
             [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//11
             [W4,WH,WH,WH,WH,WH,WH,WH,WH,WH,WH,WH,W3]//12
             ];
-$1.x = 1*tileSize;
-$1.y = 5*tileSize;
+$10.x = 1*tileSize;
+$10.y = 5*tileSize;
 
-var levels = [$1];
+var $0 = {};
+$0.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
+    [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//1
+    [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//2
+    [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//3
+    [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//4
+    [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//5
+    [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//6
+    [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//7
+    [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//8
+    [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//9
+    [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//1
+    [WV,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,ee,WV],//11
+    [W4,WH,WH,WH,WH,WH,WH,WH,WH,WH,WH,WH,W3]//12
+];
+$0.x = 1*tileSize;
+$0.y = 5*tileSize;
+
+// Levels
+var $1 = {};
+$1.world = [[W1,WH,WH,WH,WH,WH,DD,WH,WH,WH,WH,WH,W2],//0
+            [WV,o_,PH,PH,P2,T1,PV,T2,bb,bb,bb,o_,WV],//1
+            [WV,bb,bb,bb,PV,T1,PV,T2,bb,bb,bb,PU,WV],//2
+            [WV,bb,bb,bb,PV,T1,PV,T2,bb,bb,bb,PV,WV],//3
+            [WV,bb,bb,bb,PV,T1,PV,T2,bb,bb,bb,PV,WV],//4
+            [WV,bb,bb,bb,PV,T1,PV,T2,bb,bb,bb,PV,WV],//5
+            [WV,bb,bb,T2,P3,PH,P4,ee,ee,ee,ee,PV,WV],//6
+            [WV,bb,bb,T2,ee,ee,ee,PL,PH,PH,PH,P4,WV],//7
+            [WV,bb,bb,T2,ee,ee,PU,PL,PH,PH,PH,P2,WV],//8
+            [WV,bb,bb,bb,ee,ee,PV,ee,ee,ee,ee,PV,WV],//9
+            [WV,bb,bb,bb,ee,ee,PV,ee,ee,ee,ee,PD,WV],//1
+            [WV,c_,PH,PH,PH,PH,P4,ee,ee,ee,ee,o_,WV],//11
+            [W4,WH,WH,WH,WH,WH,WH,WH,WH,WH,WH,WH,W3]//12
+];
+$1.x = 6*tileSize;
+$1.y = 7*tileSize;
+
+var levels = [$1, $10];
