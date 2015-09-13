@@ -5,6 +5,8 @@
 var START = 0;
 var MENU = 1;
 var GAME = 2;
+var DEAD = 3;
+var NEW_LEVEL = 4;
 
 var currentState = START;
 
@@ -36,6 +38,7 @@ map.onload = function () {
 };
 
 var startLayer = [];
+var deadLayer = [];
 
 var backgroundLayer = [];
 var foregroundLayer = [];
@@ -54,6 +57,7 @@ var hero;
 var init = function () {
 
     loadStart();
+    loadDead();
 
     loadLevel();
 
@@ -62,7 +66,18 @@ var init = function () {
 };
 
 var reset = function () {
+    backgroundLayer = [];
+    foregroundLayer = [];
+    gameObjects = [];
+    walls = [];
+    eggs = [];
+    doors = [];
+    rocks = [];
+    chest = null;
+    knights = [];
+    swords = [];
 
+    hero = null;
 };
 
 var update = function (dt) {
@@ -75,6 +90,16 @@ var update = function (dt) {
 
 var updateLevel = function (dt) {
     if (started == false) return;
+
+    if (hero.dead) {
+        currentState = DEAD;
+        reset();
+        loadLevel();
+        return;
+    } else if (hero.win) {
+        currentState = NEW_LEVEL;
+        return;
+    }
 
     gameObjects.forEach(function(o) {
         o.update(dt);
@@ -120,6 +145,13 @@ var loadStart = function() {
     var hero = new Hero(ctx,scaledMap, tileSize, tileSize, 190, 300);
     startLayer.push(background);
     startLayer.push(hero);
+};
+
+var loadDead = function() {
+    var background = new TiledBackground(ctx,scaledMap,darkTile,tileSize);
+    var hero = new Hero(ctx,scaledMap, tileSize, tileSize, 190, 300);
+    deadLayer.push(background);
+    deadLayer.push(hero);
 };
 
 var loadLevel = function() {
@@ -197,11 +229,10 @@ var render = function () {
     }
     else if (currentState == START) {
         renderStart();
-        draw('Fantastic', 5, 120, 150);
-        draw('monster', 5, 130, 190);
-        draw('chronicles', 5, 110, 230);
-        draw('ehtd presents', 2, 160, 100);
-        draw('Z to start', 2, 170, 350);
+
+    }
+    else if (currentState == DEAD) {
+        renderDead();
     }
 };
 
@@ -248,7 +279,23 @@ var renderLevel = function() {
 var renderStart = function() {
     startLayer.forEach(function(o){
         o.render();
-    })
+    });
+
+    draw('Fantastic', 5, 120, 150);
+    draw('monster', 5, 130, 190);
+    draw('chronicles', 5, 110, 230);
+    draw('ehtd presents', 2, 160, 100);
+    draw('Z to start', 2, 170, 350);
+};
+
+var renderDead = function () {
+    deadLayer.forEach(function(o){
+        o.render();
+    });
+
+    draw('not today', 5, 120, 150);
+    draw('What do we say to the god of death?', 2, 70, 100);
+    draw('Z to revive', 2, 160, 350);
 };
 
 //---------------------------------
@@ -306,6 +353,8 @@ window.addEventListener("keydown", function(e) {
 
 var changeState = function() {
     if (currentState == START) {
+        currentState = GAME;
+    } else if (currentState == DEAD) {
         currentState = GAME;
     }
 };
